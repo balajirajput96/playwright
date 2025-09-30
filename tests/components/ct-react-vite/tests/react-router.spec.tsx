@@ -17,10 +17,10 @@ test('update should not reset mount hooks', async ({ page, mount }) => {
   const component = await mount<HooksConfig>(<App title='before'/>, {
     hooksConfig: { routing: true },
   });
-  await expect(component.getByRole('heading')).toHaveText('before');
+  await expect(component.getByRole('heading', { name: 'before' })).toBeVisible();
   await expect(component.getByRole('heading', { name: 'Login' })).toBeVisible();
 
   await component.update(<App title='after'/>);
-  await expect(component.getByRole('heading')).toHaveText('after');
+  await expect(component.getByRole('heading', { name: 'after' })).toBeVisible();
   await expect(component.getByRole('heading', { name: 'Login' })).toBeVisible();
 });
